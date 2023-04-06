@@ -1,0 +1,23 @@
+.login {
+    width: 100%;
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    background-color: #000000;
+}
+
+/*@media screen and (min-width: 768px) {*/
+/*    .login {*/
+/*        margin: 0 auto;*/
+/*        max-width: 360;*/
+/*    }*/
+/*}*/
+
+/*@media screen and (min-width: 1024px) {*/
+/*    .login {*/
+/*        max-width: 880px;*/
+/*    }*/
+/*}*/

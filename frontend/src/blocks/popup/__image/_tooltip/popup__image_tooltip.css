@@ -1,0 +1,13 @@
+.popup__image_tooltip {
+    width: 120px;
+    height: 120px;
+    padding: 0;
+    margin: 60px auto 32px auto;
+    position: relative;
+}
+
+@media screen and (max-width: 320px) {
+    .popup__image_tooltip {
+        margin: 50px auto 0px auto;
+    }
+}

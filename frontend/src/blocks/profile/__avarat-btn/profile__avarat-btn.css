@@ -1,0 +1,23 @@
+.profile__avarat-btn {
+  box-shadow: 0 0 0 5px #000;
+  transition: 0.2s ease-in-out;
+  opacity: 0;
+  border: none;
+  border-radius: 50%;
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background-image: url(../../../images/pencil.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 26px;
+  object-fit: cover;
+  border-style: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.profile__avarat-btn:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 0 10px #000;
+}

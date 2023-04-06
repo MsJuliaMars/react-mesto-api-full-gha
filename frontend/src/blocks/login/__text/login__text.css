@@ -1,0 +1,41 @@
+.login__text {
+    margin: 0;
+    margin-bottom: 30px;
+    margin-left: 22px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    padding-bottom: 6px;
+    color: #FFFFFF;
+    border: none;
+    width: 358px;
+    height: 27px;
+    border-bottom: 2px solid #CCCCCC;;
+    /*width: 80%;*/
+    outline: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    background: transparent;
+
+}
+
+@-webkit-keyframes autofill {
+    to {
+        color: #000;
+        background: transparent;
+    }
+}
+
+input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+
+@media screen and (max-width: 320px) {
+    .login__text {
+        max-width: 260px;
+        height: 27px;
+    }
+}

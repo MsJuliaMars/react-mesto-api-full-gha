@@ -1,0 +1,15 @@
+.popup__picture-title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ffffff;
+  margin: 10px 0px 0px 0px;
+  padding: 0;
+  align-self: flex-start;
+}
+@media screen and (min-width: 768px) {
+  .popup__picture-title {
+    margin: 10px 0px 0px 0px;
+  }
+}

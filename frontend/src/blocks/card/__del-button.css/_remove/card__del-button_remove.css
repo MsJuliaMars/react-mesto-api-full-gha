@@ -1,0 +1,6 @@
+.card__del-button_remove {
+    /*background: transparent;*/
+    /*color: transparent;*/
+    visibility: hidden;
+    margin-top: -6px;
+}

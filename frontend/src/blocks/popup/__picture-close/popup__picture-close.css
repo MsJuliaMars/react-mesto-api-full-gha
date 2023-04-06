@@ -1,0 +1,25 @@
+.popup__picture-close {
+  background-image: url(../../../images/popup__close.svg);
+  width: 20px;
+  height: 20px;
+  position: relative;
+  z-index: 2;
+  border: 0;
+  background-color: transparent;
+  align-self: flex-end;
+  margin-bottom: 16px;
+}
+.popup__picture-close:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+@media screen and (min-width: 768px) {
+  .popup__picture-close {
+    background-image: url(../../../images/popup__close_xl.svg);
+    width: 32px;
+    height: 32px;
+    background-repeat: no-repeat;
+    margin-bottom: 5px;
+    margin-right: -35px;
+  }
+}

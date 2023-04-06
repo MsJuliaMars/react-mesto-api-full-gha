@@ -1,0 +1,20 @@
+.profile__avatar {
+  width: 120px;
+  height: 120px;
+  border: none;
+  border-radius: 50%;
+  border-style: none;
+  margin: 3px 100px 29px 101px;
+  object-fit: cover;
+  background-image: url(../../../images/avatar__kusto.png);
+  position: relative;
+  background-color: black;
+}
+@media screen and (min-width: 768px) {
+  .profile__avatar {
+    margin: 0;
+    margin-right: 30px;
+    padding: 0;
+    background-image: url(../../../images/avatar__kusto.png);
+  }
+}

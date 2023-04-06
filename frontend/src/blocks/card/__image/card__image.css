@@ -1,0 +1,12 @@
+.card__image {
+  padding: 0;
+  margin: 0;
+  padding-top: 0px;
+  width: 100%;
+  height: 282px;
+  border-radius: 10px 10px 0px 0px;
+  align-self: flex-start;
+  object-fit: cover;
+
+  justify-content: flex-start;
+}

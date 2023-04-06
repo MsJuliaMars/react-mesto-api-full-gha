@@ -1,0 +1,17 @@
+.login__form{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 112px;
+    margin-top: 60px;
+    paddind: 0;
+}
+
+@media (min-width: 1024px) {
+    .login__form{
+        /*margin-bottom: auto;*/
+    }
+}

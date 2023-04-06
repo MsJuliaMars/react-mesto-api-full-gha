@@ -1,0 +1,21 @@
+.header__userInformations {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    flex-direction: row;
+    position: relative;
+    margin-top:auto;
+    margin-bottom: auto;
+    height:22px;
+}
+
+@media screen and (max-width: 320px) {
+    .header__userInformations {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        margin-top: 13px;
+        margin-bottom: 40px;
+    }
+}

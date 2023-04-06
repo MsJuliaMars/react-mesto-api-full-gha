@@ -1,0 +1,29 @@
+.popup__text {
+  margin: 0;
+  margin-bottom: 13px;
+  margin-left: 22px;
+
+  padding-bottom: 6px;
+
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  width: 80%;
+  outline: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+
+  color: #000000;
+}
+
+@media screen and (min-width: 768px) {
+  .popup__text {
+    margin-left: 36px;
+  }
+}
