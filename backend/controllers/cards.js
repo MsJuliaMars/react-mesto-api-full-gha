@@ -51,7 +51,7 @@ const deleteCard = (req, res, next) => {
         return Card.findByIdAndDelete(req.params.cardId)
           .then(() => {
             res.status(STATUS_CODE.OK)
-              .send(card);
+              .send({data: card});
           });
       }
       throw new ForbiddenError(MESSAGE.ERROR_CONFLICT_CARD);
