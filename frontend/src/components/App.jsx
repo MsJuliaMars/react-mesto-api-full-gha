@@ -54,6 +54,7 @@ function App() {
         if (data?.token) {
           localStorage.setItem("jwt", data.token);
           login();
+          api.setToken(data.token); // передает в api новое значение токена
           setEmail(email);
           navigate("/");
         }
@@ -105,7 +106,7 @@ function App() {
         .then((res) => {
           // авторизуем пользователя
           login();
-          setEmail(res.data.email);
+          setEmail(res.email);
           navigate("/");
         })
         .catch((err) => console.log(err));
@@ -158,26 +159,26 @@ function App() {
   };
 
   const handleCardLike = (card) => {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id); // снова проверяем, есть ли уже лайк на этой карточке
+    const isLiked = card.likes.some((i) => i === currentUser._id); // снова проверяем, есть ли уже лайк на этой карточке
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api
-      .changeLikeCardStatus(card._id, !isLiked)
-      .then((newCard) => {
-        setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
-        );
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+        .changeLikeCardStatus(card._id, !isLiked)
+        .then((newCard) => {
+          setCards((state) =>
+              state.map((c) => (c._id === card._id ? newCard : c))
+          );
+        })
+        .catch((err) => {
+          console.log(err);
+        });
   };
 
   const handleCardDelete = (card) => {
     //удаление карточки
     api
-      .deleteCard(card._id)
-      .then((res) => {
-        setCards((cards) => cards.filter((item) => item._id !== card._id));
+      .deleteCard(card)
+      .then((_id) => {
+        setCards((cards) => cards.filter((item) => item._id !== card));
       })
       .catch((err) => console.log(err));
   };

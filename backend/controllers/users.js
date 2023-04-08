@@ -17,7 +17,7 @@ const ConflictError = require('../errors/ConflictError');
 const getUsers = (req, res, next) => {
   User.find({})
     .then((users) => res.status(STATUS_CODE.OK)
-      .send({ users }))
+      .send({users}))
     .catch(next);
 };
 
@@ -27,7 +27,7 @@ const getUserID = (req, res, next) => {
     .orFail(new NotFound(`Извините, пользователь _id=${req.params.userId} не найден.`))
     .then((user) => {
       res.status(STATUS_CODE.OK)
-        .send({ data: user });
+        .send({data: user});
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -59,6 +59,7 @@ const createUser = (req, res, next) => {
         about: user.about,
         avatar: user.avatar,
         email: user.email,
+        _id: user._id,
       }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -89,11 +90,11 @@ const login = (req, res, next) => {
   return User.findUserByCredentials(email, password)
     .then((user) => {
       // eslint-disable-next-line no-underscore-dangle
-      const token = jwt.sign({ _id: user._id }, process.env.NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
-      res.cookie('jwt', token, {
-        httpOnly: true,
-        maxAge: 3600000 * 7,
-      }); // возвращаем токен
+      const token = jwt.sign({_id: user._id}, process.env.NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', {expiresIn: '7d'});
+      // res.cookie('jwt', token, {
+      //   httpOnly: true,
+      //   maxAge: 3600000 * 7,
+      // }); // возвращаем токен
       res.status(STATUS_CODE.OK)
         .send({
           message: MESSAGE.SUCCESS_AUTH,
@@ -122,7 +123,7 @@ const updateUser = (req, res, next) => {
     })
     .then((user) => {
       res.status(STATUS_CODE.OK)
-        .send({ data: user });
+        .send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
@@ -135,9 +136,9 @@ const updateUser = (req, res, next) => {
 
 // PATCH /users/me/avatar — обновляет аватар
 const updateUserAvatar = (req, res, next) => {
-  const { avatar } = req.body;
+  const {avatar} = req.body;
   // eslint-disable-next-line max-len
-  User.findByIdAndUpdate(req.user._id, { avatar }, {
+  User.findByIdAndUpdate(req.user._id, {avatar}, {
     new: true,
     runValidators: true,
   })
@@ -146,7 +147,7 @@ const updateUserAvatar = (req, res, next) => {
       throw new NotFound(`Извините, пользователь _id=${req.params.userId} не найден.`);
     })
     .then((user) => res.status(STATUS_CODE.OK)
-      .send({ data: user }))
+      .send(user))
     .catch(next);
 };
 

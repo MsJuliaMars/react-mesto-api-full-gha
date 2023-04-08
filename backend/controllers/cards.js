@@ -30,7 +30,7 @@ const createCard = (req, res, next) => {
   })
     .then((card) => {
       res.status(STATUS_CODE.OK)
-        .send({ data: card });
+        .send(card);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -43,7 +43,7 @@ const createCard = (req, res, next) => {
 
 // DELETE /cards/:cardId — удаляет карточку по идентификатору
 const deleteCard = (req, res, next) => {
-  const { cardId } = req.params;
+  const {cardId} = req.params;
   Card.findById(cardId)
     .orFail(new NotFound(`Карточка с указанным _id=${req.params.cardId} не найдена.`))
     .then((card) => {
@@ -51,7 +51,7 @@ const deleteCard = (req, res, next) => {
         return Card.findByIdAndDelete(req.params.cardId)
           .then(() => {
             res.status(STATUS_CODE.OK)
-              .send({ data: card });
+              .send(card);
           });
       }
       throw new ForbiddenError(MESSAGE.ERROR_CONFLICT_CARD);
@@ -69,8 +69,8 @@ const deleteCard = (req, res, next) => {
 const likeCard = (req, res, next) => {
   Card.findByIdAndUpdate(
     req.params.cardId,
-    { $addToSet: { likes: req.user._id } }, // добавить _id в массив, если его там нет
-    { new: true },
+    {$addToSet: {likes: req.user._id}}, // добавить _id в массив, если его там нет
+    {new: true},
   )
     .orFail(() => {
       // eslint-disable-next-line no-new
@@ -78,7 +78,7 @@ const likeCard = (req, res, next) => {
     })
     .then((card) => {
       res.status(STATUS_CODE.OK)
-        .send({ data: card });
+        .send(card);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -93,15 +93,15 @@ const likeCard = (req, res, next) => {
 const dislikeCard = (req, res, next) => {
   Card.findByIdAndUpdate(
     req.params.cardId,
-    { $pull: { likes: req.user._id } }, // убрать _id из массива
-    { new: true },
+    {$pull: {likes: req.user._id}}, // убрать _id из массива
+    {new: true},
   )
     .orFail(() => {
       // eslint-disable-next-line no-new
       throw new NotFound(MESSAGE.CARD_NOT_FOUND);
     })
     .then((card) => res.status(STATUS_CODE.OK)
-      .send({ data: card }))
+      .send(card))
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new BadRequestError(MESSAGE.ERROR_NOT_LIKE));

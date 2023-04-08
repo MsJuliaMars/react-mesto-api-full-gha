@@ -9,7 +9,7 @@ module.exports.options = {
   ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   preflightContinue: false,
-  optionsSuccessStatus: 200,
+  optionsSuccessStatus: 204,
   allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
   credentials: true,
 };

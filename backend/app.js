@@ -16,25 +16,21 @@ const handleError = require('./middlewares/handleError');
 const auth = require('./middlewares/auth');
 const NotFound = require('./errors/NotFound');
 const {corsOptions} = require('./utils/corsOptions');
-const path = require("path");
 const {
   requestLogger,
   errorLogger,
 } = require('./middlewares/logger');
 const
-  { PORT = 3000 } = process.env;
+  { PORT = 3001 } = process.env;
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {});
-
 const app = express(); // запускаем наш express
-// app.use(express.static(path.join(__dirname, 'build')));
-app.use(express.static(__dirname));
-
-app.get("/*", function(req, res) {
-  res.sendFile(path.join(__dirname, "index.html"));
-});
-app.use('*', cors(corsOptions));
+// app.use(cors({origin:'*'}));
+// app.use(cors());
 app.use(helmet());
+app.use('*', cors(corsOptions));
+// app.use(cors({origin:'*'}));
+// app.use(cors());
 app.use(cookieParser());
 app.use(bodyParser.json()); // для собирания JSON-формата
 app.use(bodyParser.urlencoded({ extended: true })); // для приёма веб-страниц внутри POST-запроса
