@@ -90,7 +90,7 @@ class Api {
 
 // Создаем один экземпляр класса на все приложение
 const api = new Api({
-    url: "http://localhost:3001", //"https://mesto.nomoreparties.co/v1/cohort-45",
+    url: "https://api.mesto.kozhevnikova.nomoredomains.monster",//"http://localhost:3001", //"https://mesto.nomoreparties.co/v1/cohort-45",
     headers: {
         authorization: localStorage.getItem('token'),//`Bearer ${token}`,//"715ee43e-9fed-4d9c-98b6-32ed8625bba1",
         "Content-Type": "application/json",

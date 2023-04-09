@@ -25,8 +25,6 @@ const
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {});
 const app = express(); // запускаем наш express
-// app.use(cors({origin:'*'}));
-// app.use(cors());
 app.use(helmet());
 app.use('*', cors(corsOptions));
 // app.use(cors({origin:'*'}));
