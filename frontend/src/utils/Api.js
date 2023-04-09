@@ -1,12 +1,7 @@
 class Api {
-    // constructor(options) {
-    //   this._url = options.url;
-    //   this._headers = options.headers;
-    //   this._token =
-    // }
-    constructor({url, headers}) {
-        this._url = url;
-        this._headers = headers;
+    constructor(options) {
+        this._url = options.url;
+        this._headers = options.headers;
         this._token = null;
     }
 
@@ -93,12 +88,11 @@ class Api {
     }
 }
 
-let token = localStorage.getItem('jwt');
 // Создаем один экземпляр класса на все приложение
 const api = new Api({
     url: "http://localhost:3001", //"https://mesto.nomoreparties.co/v1/cohort-45",
     headers: {
-        authorization: `Bearer ${token}`, //localStorage.getItem('token'),//`Bearer ${token}`,//"715ee43e-9fed-4d9c-98b6-32ed8625bba1",
+        authorization: localStorage.getItem('token'),//`Bearer ${token}`,//"715ee43e-9fed-4d9c-98b6-32ed8625bba1",
         "Content-Type": "application/json",
     },
 });

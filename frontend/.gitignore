@@ -5,9 +5,7 @@
 /.pnp
 .pnp.js
 /.vscode
-/.idea
-/.nojekyll
-/README.old.md
+
 
 # testing
 /coverage
