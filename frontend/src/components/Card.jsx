@@ -11,8 +11,8 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
     link,
   } = card;
   const likes = card.likes.map((like) => like._id);
-  const isLiked = card.likes.some((i) => i._id === currentUser._id);
-  const isOwn = ownerId === currentUser?._id;
+  const isLiked = card.likes.some((i) => i === currentUser._id);
+  const isOwn = card.owner === currentUser?._id;
 
   function handleClick() {
     onCardClick(card);
@@ -29,7 +29,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   return (
     <li className="card">
       <button
-        className={`${isOwn ? "card__del-button" : "card__del-button_remove"}`}
+        className= {`${isOwn ? "card__del-button" : "card__del-button_remove"}`}
         type="submit"
         aria-label="Удалить карточку"
         onClick={handleDeleteClick}
