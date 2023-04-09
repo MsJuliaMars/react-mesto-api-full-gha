@@ -1,4 +1,5 @@
 {
+  "proxy": "http://localhost:3000",
   "name": "express-mesto-gha",
   "version": "1.0.0",
   "description": "[![Tests](../../actions/workflows/tests-13-sprint.yml/badge.svg)](../../actions/workflows/tests-13-sprint.yml) [![Tests](../../actions/workflows/tests-14-sprint.yml/badge.svg)](../../actions/workflows/tests-14-sprint.yml)\r # Проект Mesto фронтенд + бэкенд",
@@ -18,6 +19,7 @@
   "bugs": {
     "url": "https://github.com/MsJuliaMars/express-mesto-gha/issues"
   },
+  "homepage": ".",
   "devDependencies": {
     "eslint": "^8.35.0",
     "eslint-config-airbnb": "^19.0.4",
