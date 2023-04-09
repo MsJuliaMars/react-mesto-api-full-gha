@@ -15,29 +15,18 @@ const routes = require('./routes/index');
 const handleError = require('./middlewares/handleError');
 const auth = require('./middlewares/auth');
 const NotFound = require('./errors/NotFound');
-// const {corsOptions} = require('./utils/corsOptions');
+const {corsOptions} = require('./utils/corsOptions');
 const {
   requestLogger,
   errorLogger,
 } = require('./middlewares/logger');
 const
   { PORT = 3001 } = process.env;
-const whitelist = ['https://mesto.kozhevnikova.nomoredomains.work', 'http://mesto.kozhevnikova.nomoredomains.work'];
-const corsOptions = {
-  origin(origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-};
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {});
 const app = express(); // запускаем наш express
 app.use(helmet());
-app.use(cors(corsOptions));
-// app.use('*', cors(corsOptions));
+app.use('*', cors(corsOptions));
 // app.use(cors({origin:'*'}));
 // app.use(cors());
 app.use(cookieParser());
