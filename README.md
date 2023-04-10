@@ -8,7 +8,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 130.193.37.84
+IP 130.193.37.84
 
 Frontend https://mesto.kozhevnikova.nomoredomains.work
 
