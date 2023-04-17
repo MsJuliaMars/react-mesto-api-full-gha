@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 // eslint-disable-next-line import/no-extraneous-dependencies
-const {errors} = require('celebrate');
+const { errors } = require('celebrate');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const helmet = require('helmet');
 const usersRouter = require('./routes/users');
@@ -15,13 +15,11 @@ const routes = require('./routes/index');
 const handleError = require('./middlewares/handleError');
 const auth = require('./middlewares/auth');
 const NotFound = require('./errors/NotFound');
-const {corsOptions} = require('./utils/corsOptions');
-const {
-  requestLogger,
-  errorLogger,
-} = require('./middlewares/logger');
+const { corsOptions } = require('./utils/corsOptions');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+
 const
-  {PORT = 3001} = process.env;
+  { PORT = 3001 } = process.env;
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {});
 const app = express(); // запускаем наш express
@@ -31,7 +29,7 @@ app.use('*', cors(corsOptions));
 // app.use(cors());
 app.use(cookieParser());
 app.use(bodyParser.json()); // для собирания JSON-формата
-app.use(bodyParser.urlencoded({extended: true})); // для приёма веб-страниц внутри POST-запроса
+app.use(bodyParser.urlencoded({ extended: true })); // для приёма веб-страниц внутри POST-запроса
 app.use(requestLogger);
 app.get('/crash-test', () => {
   setTimeout(() => {

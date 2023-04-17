@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 const jwt = require('jsonwebtoken');
-const {JWT_SECRET} = process.env;
+
+const { JWT_SECRET } = process.env;
 const {
   MESSAGE,
 } = require('../utils/constantsError');

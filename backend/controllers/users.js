@@ -1,8 +1,9 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 const bcrypt = require('bcryptjs'); // модуль для хеширования пароля
 // eslint-disable-next-line import/no-extraneous-dependencies
-const jwt = require('jsonwebtoken'); // модуль jsonwebtoken модуль для создания токена
-const {JWT_SECRET} = process.env;
+const jwt = require('jsonwebtoken');
+// модуль jsonwebtoken модуль для создания токена
+const { JWT_SECRET } = process.env;
 const User = require('../models/user');
 const NotFound = require('../errors/NotFound');
 // eslint-disable-next-line quotes
@@ -17,7 +18,7 @@ const ConflictError = require('../errors/ConflictError');
 const getUsers = (req, res, next) => {
   User.find({})
     .then((users) => res.status(STATUS_CODE.OK)
-      .send({users}))
+      .send({ users }))
     .catch(next);
 };
 
@@ -27,7 +28,7 @@ const getUserID = (req, res, next) => {
     .orFail(new NotFound(`Извините, пользователь _id=${req.params.userId} не найден.`))
     .then((user) => {
       res.status(STATUS_CODE.OK)
-        .send({data: user});
+        .send({ data: user });
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -90,7 +91,7 @@ const login = (req, res, next) => {
   return User.findUserByCredentials(email, password)
     .then((user) => {
       // eslint-disable-next-line no-underscore-dangle
-      const token = jwt.sign({_id: user._id}, process.env.NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', {expiresIn: '7d'});
+      const token = jwt.sign({ _id: user._id }, process.env.NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
       // res.cookie('jwt', token, {
       //   httpOnly: true,
       //   maxAge: 3600000 * 7,
@@ -136,9 +137,9 @@ const updateUser = (req, res, next) => {
 
 // PATCH /users/me/avatar — обновляет аватар
 const updateUserAvatar = (req, res, next) => {
-  const {avatar} = req.body;
+  const { avatar } = req.body;
   // eslint-disable-next-line max-len
-  User.findByIdAndUpdate(req.user._id, {avatar}, {
+  User.findByIdAndUpdate(req.user._id, { avatar }, {
     new: true,
     runValidators: true,
   })
