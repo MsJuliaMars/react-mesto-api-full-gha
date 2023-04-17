@@ -3,8 +3,24 @@ logs
 *.log
 npm-debug.log*
 
-# Dependency directory
-node_modules
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # Optional npm cache directory
 .npm
@@ -13,6 +29,3 @@ node_modules
 .DS_Store
 .idea
 .vscode
-
-#ENV
-.env
