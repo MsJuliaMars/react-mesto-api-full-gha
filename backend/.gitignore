@@ -19,4 +19,4 @@ git
 git/
 
 # keys
-.env
+*.env
