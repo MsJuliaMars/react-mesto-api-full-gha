@@ -69,19 +69,14 @@ function App() {
     const handleRegister = ({email, password}) => {
         apiAuth
             .register(email, password)
-            .then((res) => {
-                if (res.data) {
-                    setSuccessRegister(true);
-                    navigate("/sign-in");
-                } else {
-                    setSuccessRegister(false);
-                }
-            })
+             .then(() => {
+                 setSuccessRegister(true);
+                 setIsInfoTooltipPopupOpen(true);
+                 navigate("/sign-in");
+        })
             .catch((err) => {
                 console.log(err);
                 setSuccessRegister(false);
-            })
-            .finally(() => {
                 setIsInfoTooltipPopupOpen(true);
             });
     };
