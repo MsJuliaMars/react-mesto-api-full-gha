@@ -1,7 +1,7 @@
 const handleError = (err, req, res, next) => {
   const {
     statusCode = 500,
-    message = 'Неизвестная ошибка сервера _',
+    message,
   } = err;
   res
     .status(statusCode)

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-// eslint-disable-next-line import/no-extraneous-dependencies
 const isURL = require('validator/lib/isURL');
 
 const cardSchema = new mongoose.Schema({
@@ -22,12 +21,12 @@ const cardSchema = new mongoose.Schema({
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
-    required: true,
+    ref: 'user',
   },
   likes: [{
     type: mongoose.Schema.Types.ObjectId,
-    required: true,
     default: [],
+    ref: 'user',
   },
   ],
   createdAt: {

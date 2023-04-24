@@ -1,12 +1,9 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 const bcrypt = require('bcryptjs'); // модуль для хеширования пароля
-// eslint-disable-next-line import/no-extraneous-dependencies
 const jwt = require('jsonwebtoken');
 // модуль jsonwebtoken модуль для создания токена
 const { JWT_SECRET } = process.env;
 const User = require('../models/user');
 const NotFound = require('../errors/NotFound');
-// eslint-disable-next-line quotes
 const {
   STATUS_CODE,
   MESSAGE,
@@ -54,15 +51,11 @@ const createUser = (req, res, next) => {
       email: req.body.email,
       password: hash,
     }))
-    .then((user) => res.status(STATUS_CODE.OK)
-      .send({
-        name: user.name,
-        about: user.about,
-        avatar: user.avatar,
-        email: user.email,
-        _id: user._id,
-      }))
-    .catch((err) => {
+    .then((queryObj) => {
+      const user = queryObj.toObject();
+      delete user.password;
+      res.status(STATUS_CODE.OK).send(user);
+    }).catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError(MESSAGE.ERROR_CREATE_USER));
       } else if (err.code === 11000) {
@@ -74,7 +67,6 @@ const createUser = (req, res, next) => {
 };
 
 // GET /users/me - возвращает информацию о текущем пользователе
-// eslint-disable-next-line consistent-return
 const getCurrentUser = (req, res, next) => {
   User.findById(req.user._id)
     .orFail(new NotFound(MESSAGE.USER_NOT_FOUND))
@@ -90,7 +82,6 @@ const login = (req, res, next) => {
   } = req.body;
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      // eslint-disable-next-line no-underscore-dangle
       const token = jwt.sign({ _id: user._id }, process.env.NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
       // res.cookie('jwt', token, {
       //   httpOnly: true,
@@ -119,7 +110,6 @@ const updateUser = (req, res, next) => {
     runValidators: true,
   })
     .orFail(() => {
-      // eslint-disable-next-line no-new
       throw new NotFound(MESSAGE.USER_NOT_FOUND);
     })
     .then((user) => {
@@ -127,7 +117,7 @@ const updateUser = (req, res, next) => {
         .send(user);
     })
     .catch((err) => {
-      if (err.name === 'ValidationError' || err.name === 'CastError') {
+      if (err.name === 'CastError') {
         next(new BadRequestError(MESSAGE.ERROR_UPDATE_PROFILE));
       } else {
         next(err);
@@ -138,18 +128,22 @@ const updateUser = (req, res, next) => {
 // PATCH /users/me/avatar — обновляет аватар
 const updateUserAvatar = (req, res, next) => {
   const { avatar } = req.body;
-  // eslint-disable-next-line max-len
   User.findByIdAndUpdate(req.user._id, { avatar }, {
     new: true,
     runValidators: true,
   })
     .orFail(() => {
-      // eslint-disable-next-line no-new
       throw new NotFound(`Извините, пользователь _id=${req.params.userId} не найден.`);
     })
     .then((user) => res.status(STATUS_CODE.OK)
       .send(user))
-    .catch(next);
+    .catch((err) => {
+      if (err.name === 'ValidationError') {
+        next(new BadRequestError(STATUS_CODE.ERROR_UPDATE_AVATAR));
+      } else {
+        next(err);
+      }
+    });
 };
 
 module.exports = {

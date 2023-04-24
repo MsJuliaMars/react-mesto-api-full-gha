@@ -7,21 +7,18 @@ const { MESSAGE } = require('../utils/constantsError');
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: false,
     minlength: 2,
     maxlength: 30,
     default: 'Жак-Ив Кусто',
   },
   about: {
     type: String,
-    required: false,
     minlength: 2,
     maxlength: 30,
     default: 'Исследователь',
   },
   avatar: {
     type: String,
-    required: false,
     validate: {
       validator(avatar) {
         return /^(http:|https:)\/\/w*\w/.test(avatar);
@@ -48,7 +45,6 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-// eslint-disable-next-line func-names
 userSchema.statics.findUserByCredentials = function (email, password) {
   return this.findOne({ email })
     .select('+password')
@@ -56,9 +52,7 @@ userSchema.statics.findUserByCredentials = function (email, password) {
       if (!user) {
         throw new UnauthorizedError(MESSAGE.FAIL_AUTH);
       }
-      // eslint-disable-next-line no-undef
       return bcrypt.compare(password, user.password)
-        // eslint-disable-next-line consistent-return
         .then((matched) => {
           if (!matched) {
             throw new UnauthorizedError(MESSAGE.FAIL_AUTH);

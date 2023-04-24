@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 const Card = require('../models/card');
 const {
   STATUS_CODE,
@@ -10,7 +9,7 @@ const BadRequestError = require('../errors/BadRequestError');
 
 // GET /cards — возвращает все карточки
 const getCard = (req, res, next) => {
-  Card.find({})
+  Card.find({}).populate(['owner', 'likes'])
     .then((cards) => res.status(STATUS_CODE.OK)
       .send(cards))
     .catch(next);
@@ -29,8 +28,7 @@ const createCard = (req, res, next) => {
     owner: ownerId,
   })
     .then((card) => {
-      res.status(STATUS_CODE.OK)
-        .send(card);
+      card.populate(['owner']).then(() => res.status(STATUS_CODE.CREATE).send(card)).catch(next);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -73,9 +71,8 @@ const likeCard = (req, res, next) => {
     { new: true },
   )
     .orFail(() => {
-      // eslint-disable-next-line no-new
       throw new NotFound(MESSAGE.CARD_NOT_FOUND);
-    })
+    }).populate(['owner', 'likes'])
     .then((card) => {
       res.status(STATUS_CODE.OK)
         .send(card);
@@ -97,9 +94,8 @@ const dislikeCard = (req, res, next) => {
     { new: true },
   )
     .orFail(() => {
-      // eslint-disable-next-line no-new
       throw new NotFound(MESSAGE.CARD_NOT_FOUND);
-    })
+    }).populate(['owner', 'likes'])
     .then((card) => res.status(STATUS_CODE.OK)
       .send(card))
     .catch((err) => {
