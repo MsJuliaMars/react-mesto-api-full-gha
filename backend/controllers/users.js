@@ -117,7 +117,7 @@ const updateUser = (req, res, next) => {
         .send(user);
     })
     .catch((err) => {
-      if (err.name === 'CastError') {
+      if (err.name === 'ValidationError') {
         next(new BadRequestError(MESSAGE.ERROR_UPDATE_PROFILE));
       } else {
         next(err);

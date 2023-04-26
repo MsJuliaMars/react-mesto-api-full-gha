@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
 
   // убеждаемся, что он есть или начинается с Bearer
   if (!authorization || !authorization.startsWith('Bearer')) {
-    next(new UnauthorizedError(MESSAGE.ERROR_UNAUTHORIZED));
+    return next(new UnauthorizedError(MESSAGE.ERROR_UNAUTHORIZED));
   }
   // извлечём токен
   const token = authorization.replace('Bearer ', '');
@@ -24,7 +24,7 @@ module.exports = (req, res, next) => {
     payload = jwt.verify(token, process.env.NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
   } catch (err) {
     // отправим ошибку если не получится
-    next(new UnauthorizedError(MESSAGE.ERROR_UNAUTHORIZED));
+    return next(new UnauthorizedError(MESSAGE.ERROR_UNAUTHORIZED));
   }
   req.user = payload; // записываем пейлоуд в объект запроса
 
